@@ -5,38 +5,32 @@ How to use Airtable as a minimum viable database for your ReactJs project.
 
 **Clone the repo**:
 
-```
+```bash
 git clone https://github.com/focuswish/airtable-react.git
 ```
 
 **Install dependencies**:
 
-```
+```bash
 cd airtable-react && npm install
 ```
 
 **Add Airtable API key**:
 
-```
-echo 'export const key = "YOUR API KEY HERE";' > src/Key.js
-```
+Edit .env and add your Airtable base, table, view and API key. All of the aforementioned can be found here: [https://airtable.com/api](https://airtable.com/api)
 
-**Edit src/App.js**:
+```bash
 
-Change the url to point to your Airtable.
+AIRTABLE_BASE=
+AIRTABLE_TABLE=
+AIRTABLE_VIEW=
+AIRTABLE_API_KEY=
+AIRTABLE_MAX_RECORDS=20
 
-```
-const request = new Request('YOUR AIRTABLE URL', { ... });
-
-```
-Also change the field that's referenced in the map() function in render:
-
-```
-<td key={index}>{airtable.fields.YOUR_AIRTABLE_FIELD_HERE}</td>
 ```
 
 **Start the server**:
 
-```
+```bash
 npm run start
 ```

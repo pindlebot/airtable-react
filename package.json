@@ -1,16 +1,14 @@
 {
-  "name": "hello-world",
-  "version": "0.1.0",
+  "name": "airtable-react",
+  "version": "0.2.0",
   "private": true,
   "devDependencies": {
-    "babel-cli": "^6.22.2",
-    "babel-preset-es2015": "^6.22.0",
-    "babel-preset-react": "^6.22.0",
-    "react-scripts": "0.8.5"
+    "react-scripts": "1.0.10"
   },
   "dependencies": {
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
+    "env2": "^2.2.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
     "whatwg-fetch": "^2.0.2"
   },
   "scripts": {

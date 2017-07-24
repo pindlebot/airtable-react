@@ -1,42 +1,52 @@
-import React, { Component } from 'react';
+import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import './slant.css';
 import 'whatwg-fetch';
-import {key} from './Key';
+require('env2')('.env');
 
-const request = new Request('https://api.airtable.com/v0/appsDmF4srKVAXHqp/nootacademy?maxRecords=3&view=Main%20View', {
+// Add environmental vars to .env
+// Find them at: https://airtable.com/api
+// Base looks like appsDmF4srKVAXHqp
+// The default view is Main%20View (unless renamed)
+
+const config = {
+  base: process.env.AIRTABLE_BASE,
+  table: process.env.AIRTABLE_TABLE,
+  view: process.env.AIRTABLE_VIEW,
+  apiKey: process.env.AIRTABLE_API_KEY,
+  maxRecords: process.env.AIRTABLE_MAX_RECORDS
+}
+
+const request = new Request(`https://api.airtable.com/v0/${config.base}/${config.table}?maxRecords=${config.maxRecords}&view=${config.view}`, {
   method: 'get',
   headers: new Headers({
-    'Authorization': `Bearer ${key}`
+    'Authorization': `Bearer ${config.apiKey}`
   })
 });
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      airtable: [],
-    };
+    this.state = { records: [] };
     this.fetchAirtable = this.fetchAirtable.bind(this);
-
   }
 
-  fetchAirtable() {
-    fetch(request).then(resp => resp.json())
-      .then(resp => {
-        const records = resp.records;
-        this.setState({ airtable: records });
-      });
+  async componentDidMount() {
+    await this.fetchAirtable()
+  }
+
+  async fetchAirtable() {
+    var resp = await fetch(request).catch(err => {console.log(err)})
+    if(resp.status >= 200 && resp.status < 300) {
+      var json = await resp.json()
+      const {records} = json;
+      this.setState({ records });
+    }
   }
 
   render() {
-    const airtable = this.state.airtable;
-    const entry = airtable.map((airtable, index) =>
-      <tr>
-      <td key={index}>{airtable.fields.href}</td>
-      </tr>
-    );
+    var {records} = this.state
     return (
 
       <div className="App">
@@ -44,13 +54,12 @@ class App extends React.Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
         </div>
-
-        <button className="bttn-primary bttn-slant bttn-md" 
-        onClick={this.fetchAirtable}>Fetch</button>
-  
-        <table>
-        <tbody>{entry ? entry : ''}</tbody>
-        </table>
+    
+        <div>
+        {records && records.length > 0 ? records.map(record =>
+          <p>{JSON.stringify(record)}</p>
+        ) : <p>Double-check that you've added your API key to .env.</p>}
+        </div>
       </div>
     );
   }
