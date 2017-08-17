@@ -3,7 +3,7 @@
   "version": "0.2.0",
   "private": true,
   "devDependencies": {
-    "react-scripts": "1.0.10"
+    "react-scripts": "1.0.11"
   },
   "dependencies": {
     "env2": "^2.2.0",
