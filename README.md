@@ -6,7 +6,7 @@ How to use Airtable as a minimum viable database for your ReactJs project.
 ### Clone the repo and install dependencies
 
 ```bash
-git clone https://github.com/focuswish/airtable-react.git
+git clone https://github.com/menubar/airtable-react.git
 cd airtable-react && npm install
 ```
 
@@ -16,22 +16,28 @@ Edit .env and add your Airtable base, table, view and API key. All of the aforem
 
 ```bash
 
-AIRTABLE_BASE=
-AIRTABLE_TABLE=
-AIRTABLE_VIEW=
-AIRTABLE_API_KEY=
-AIRTABLE_MAX_RECORDS=20
+BASE=
+TABLE=
+API_KEY=
 
+```
+
+You can also run the following from the command line:
+
+```bash
+export BASE=YOUR_AIRTABLE_BASE
+export TABLE=YOUR_AIRTABLE_TABLE
+export API_KEY=YOUR_AIRTABLE_APIKEY
 ```
 
 ### Start the server
 
 ```bash
-npm run start
+yarn run start
 ```
 
 ### Further Reading
 
-[Airtable As A Minimum Viable Database For Your ReactJs Project](http://www.automationfuel.com/airtable-reactjs/)
+[Airtable As A Minimum Viable Database For Your ReactJs Project](https://menubar.io/airtable-reactjs)
 
 

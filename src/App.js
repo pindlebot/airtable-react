@@ -8,14 +8,13 @@ class App extends React.Component {
   }
 
   async componentDidMount() {
-    let resp = await fetch('/api', {
+    const resp = await fetch('/api', {
       method: 'GET',
       headers: {
         'content-type': 'application/json'
       }
     })
-    let json = await resp.json()
-    const { records } = json
+    const { records } = await resp.json()
     this.setState({ records })
   }
 
@@ -24,9 +23,12 @@ class App extends React.Component {
     return (
       <div className="App">
         <div>
-        {records && records.length > 0 ? records.map(record =>
-          <p>{JSON.stringify(record)}</p>
-        ) : <p>Double-check that you have added your API key to .env.</p>}
+        {records.length
+          ? records.map(record =>
+              <p>{JSON.stringify(record)}</p>
+            )
+          : <p>Double-check that you have added your API key to .env.</p>
+        }
         </div>
       </div>
     )

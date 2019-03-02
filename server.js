@@ -12,7 +12,7 @@ const airtable = new Airtable({
 })
 
 app.get('/api', async (req, res) => {
-  let data = await airtable
+  const data = await airtable
     .base(process.env.BASE)
     .table(process.env.TABLE)
     .list()
